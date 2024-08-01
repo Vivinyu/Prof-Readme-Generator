@@ -1,6 +1,7 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
+const inquirer = require('inquirer');//added inquirer package
+const fs = require('fs');//added fs package
 
+//added questions for user input
 const questions = [
     {
       type: 'input',
@@ -50,6 +51,7 @@ const questions = [
     },
   ];
 
+  //function to generate README content
   function generateREADME(answers) {
     return `
   # ${answers.title}
@@ -87,17 +89,19 @@ const questions = [
   `;
   }
 
+//function to write README file
   function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
       err ? console.error(err) : console.log('README.md generated successfully!')
     );
   }
 
+  //function to initialize app
   function init() {
     inquirer.prompt(questions).then((answers) => {
       const readmeContent = generateREADME(answers);
       writeToFile('README.md', readmeContent);
     });
   }
-
+//initialize app
   init();
